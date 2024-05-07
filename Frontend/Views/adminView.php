@@ -2,7 +2,7 @@
 
     function displayAddProductForm(){
         ?>
-        <form action="../../Backend/Controllers/adminController.php"  class="row g-3 mt-5 mx-5" method="post" enctype="multipart/form-data">
+        <form action="../../../Backend/Controllers/adminController.php"  class="row g-3 mt-5 mx-5" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
               <div class="col-sm-10">
                 <input type="hidden" name="action" value="ADDPRODUCT">
@@ -24,6 +24,12 @@
               <label for="category" class="col-sm-2 col-form-label">Category</label>
               <div class="col-sm-10">
               <input type="text" name ="category" placeholder="Category" class="form-control">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="description" class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-10">
+              <input type="text" name ="description" placeholder="Description" class="form-control">
               </div>
             </div>
             <div class="row mb-3">
@@ -59,8 +65,7 @@
                           <th scope="col">Category</th>
                           <th scope="col">Image</th>
                           <th scope="col">Activate Status</th>
-                          <th scope="col">Activate</th>
-                          <th scope="col">Deactivate</th>
+                          <th scope="col">Action</th>
                           <th scope="col">Edit</th>
                           <th scope="col">Delete</th>
                       </tr>
@@ -69,30 +74,27 @@
                       <?php foreach($products as $product): ?>
                       <tr>
                           <th scope="row"><?php echo $product['ID']; ?></th>
-                          <td><?php echo $product['Name']; ?></td>
-                          <td><?php echo $product['Price']; ?></td>
-                          <td><?php echo $product['Category']; ?></td>
-                          <td><img src="<?php echo '../AdminAssets/Images/ProductImages/'.$product['Image']; ?>" alt="Image" width="100" height="100"></td>
-                          <td><?php echo $product['ActivateStatus']; ?></td>
+                          <td><?php echo $product['PRODUCT']; ?></td>
+                          <td><?php echo $product['PRICE']; ?></td>
+                          <td><?php echo $product['CATEGORY']; ?></td>
+                          <td><img src="<?php echo '../../AdminAssets/Images/ProductImages/'.$product['IMAGE']; ?>" alt="Image" width="100" height="100"></td>
+                          <td><?php echo $product['IS_ACTIVE']; ?></td>
                           <td>
-                              <form method="post" action="../../Backend/Controllers/adminController.php">
-                                  <input type="hidden" name="action" value="ACTIVATEPRODUCT">
+                              <form method="post" action="../../../Backend/Controllers/adminController.php">
+                                  <input type="hidden" name="action" value="CHANGEACTIVATIONSTATUS">
                                   <input type="hidden" name="id" value="<?php echo $product['ID']; ?>">
-                                  <button type="submit" class="btn btn-success">Activate</button>
+                                  <?php if ($product['IS_ACTIVE']): ?>
+                                      <button type="submit" class="btn btn-danger">Deactivate</button>
+                                  <?php else: ?>
+                                      <button type="submit" class="btn btn-success">Activate</button>
+                                  <?php endif; ?>
                               </form>
                           </td>
                           <td>
-                              <form method="post" action="../../Backend/Controllers/adminController.php">
-                                  <input type="hidden" name="action" value="DEACTIVATEPRODUCT">
-                                  <input type="hidden" name="id" value="<?php echo $product['ID']; ?>">
-                                  <button type="submit" class="btn btn-danger">Deactivate</button>\
-                              </form>
-                          </td>
-
                               <button type="button" class="btn btn-primary" onclick="showEditForm(<?php echo htmlspecialchars(json_encode($product)); ?>)">Edit</button>
                           </td>
                           <td>
-                              <form method="post" action="../../Backend/Controllers/adminController.php">
+                              <form method="post" action="../../../Backend/Controllers/adminController.php">
                                   <input type="hidden" name="action" value="DELETEPRODUCT">
                                   <input type="hidden" name="id" value="<?php echo $product['ID']; ?>">
                                   <button type="submit" class="btn btn-danger">Delete</button>
@@ -105,7 +107,7 @@
           </div>
       </div>
       <?php
-  }
+    }
 
   function showEditProduct(){
     ?>
@@ -133,6 +135,10 @@
                 <input type="text" name="category" id="editProductCategory" class="form-control">
               </div>
               <div class="mb-3">
+                <label for="editProductDescription" class="form-label">Description</label>
+                <input type="text" name="description" id="editProductDescription" class="form-control">
+              </div>
+              <div class="mb-3">
                 <label for="editProductImage" class="form-label">Image</label>
                 <input type="file" name="image" id="editProductImage" class="form-control">
               </div>
@@ -153,12 +159,13 @@
   <script>
       function showEditForm(product) {
         document.getElementById('editProductId').value = product.ID;
-        document.getElementById('editProductName').value = product.Name;
-        document.getElementById('editProductPrice').value = product.Price;
-        document.getElementById('editProductCategory').value = product.Category;
+        document.getElementById('editProductName').value = product.PRODUCT;
+        document.getElementById('editProductPrice').value = product.PRICE;
+        document.getElementById('editProductCategory').value = product.CATEGORY;
+        document.getElementById('editProductDescription').value = product.DESCRIPTION;
         var imageElement = document.getElementById('currentProductImage');
         if (imageElement) {
-          imageElement.src = '../AdminAssets/Images/ProductImages/' + product.Image;
+          imageElement.src = '../AdminAssets/Images/ProductImages/' + product.IMAGE;
           imageElement.alt = 'Current Product Image';
         }
         document.getElementById('editProductForm').style.display = 'block';
@@ -167,7 +174,7 @@
   <?php
 
 function displayUsers(){
-  require_once("../../Backend/Models/adminModel.php");
+  require_once("../../../Backend/Models/adminModel.php");
   $users = getUsers();
 
   echo '<style>

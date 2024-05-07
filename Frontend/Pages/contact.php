@@ -47,7 +47,7 @@ https://templatemo.com/tm-589-lugx-gaming
     </div>
   </div>
 
-  <?php userNavbar("contact"); ?>
+  <?php userNavbar("Contact"); ?>
 
 
   <!-- ***** Preloader End ***** -->
@@ -135,13 +135,8 @@ https://templatemo.com/tm-589-lugx-gaming
     </div>
   </div>  
 
-  <footer>
-    <div class="container">
-      <div class="col-lg-12">
-        <p>Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp; <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a></p>
-      </div>
-    </div>
-  </footer>
+  <?php 
+         userFooter();?>
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->

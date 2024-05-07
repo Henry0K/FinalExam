@@ -4,49 +4,32 @@
         header('Location: ../../index.php');
         exit;
     }
-    require_once("./Common/navbar.php");
-    require_once("../../Backend/Models/adminModel.php");
-    require_once("../Views/adminView.php");
+    require_once("../Common/navbar.php");
+    require_once("../../../Backend/Models/adminModel.php");
+    require_once("../../Views/adminView.php");
 ?>
-
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
- 
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <title>View Products</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
 
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-  <link href="../AdminAssets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="../AdminAssets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="../../AdminAssets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-  <link href="../AdminAssets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
+  <link href="../../AdminAssets/css/style.css" rel="stylesheet">
+<head>
 <body>
   <?php AdminNavbar('View Products'); ?>
   

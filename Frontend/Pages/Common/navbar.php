@@ -1,36 +1,41 @@
 <?php
-function userNavbar($activePage){
+
+    function userNavbar($activePage){
+    $basePath = ($activePage == 'home') ? "/" : "/Frontend/Pages/";
+
     ?>
-
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="" style="width: 158px;">
-                    </a>
-
-                    <ul class="nav">
-                      <li><a href="index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
-                      <li><a href="./Frontend/Pages/shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
-                      <li><a href="product-details.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
-                      <li><a href="./Frontend/Pages/contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
-                      <li><a href="#" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
-                  </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-
-                </nav>
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- Logo, always relative to the domain root -->
+                        <a href="<?php echo $basePath; ?>index.php" class="logo">
+                            <img src="<?php echo $basePath; ?>./Frontend/Assets/assets/CSS/LOGO Small.jpeg" alt="" style="width: 158px;">
+                        </a>
+                        <!-- Navigation -->
+                        <ul class="nav">
+                            <li><a href="/Final<?php echo $basePath; ?>index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
+                            <li><a href="/Final<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
+                            <li><a href="/Final<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
+                            <li><a href="/Final<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'Contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
+                            <li><a href="/Final<?php echo $basePath; ?>signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
+                        </ul>   
+                        <!-- Menu Trigger -->
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-  </header>
-
+    </header>
     <?php
 }
+
+
+
+
 
 function AdminNavbar($activePage){
   ?>
@@ -39,7 +44,7 @@ function AdminNavbar($activePage){
       <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="">
-          <span class="d-none d-lg-block">NiceAdmin</span>
+          <span class="d-none d-lg-block">User Panel</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
       </div><!-- End Logo -->

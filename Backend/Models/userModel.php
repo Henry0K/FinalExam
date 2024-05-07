@@ -41,4 +41,18 @@ function Login($username, $password, $db){
     }
 }
 
+
+function getAllProductDistinct($db){
+
+    $sql = "SELECT DISTINCT * FROM Products";
+        $result = $db->query($sql);
+        $products = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
+    } catch (PDOException $e) {
+        echo "Database error: " . $e->getMessage();
+        return [];
+    }
+
+
+
 ?>

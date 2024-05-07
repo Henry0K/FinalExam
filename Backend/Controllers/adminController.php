@@ -10,23 +10,24 @@ if (isset($_POST["action"])) {
             $product->name = $_POST["name"];
             $product->description = $_POST["description"];
             $product->price = $_POST["price"];
-            $product->image = $_POST["image"];
             $product->category = $_POST["category"];
-            $product->is_active = $_POST["is_active"];
 
-            $target_dir = "../../Frontend/Assets/Images/ProductImages/";
+            //By default a product is active until someone from the admin side deactivates the product
+            $product->is_active = 1;
+
+            $target_dir = "../../Frontend/AdminAssets/Images/ProductImages/";
             //             ../../Frontend/Assets/Images/BlogImages/  Title  .jpg or .png or .jpeg
-            $target_file = $target_dir . $product->id . '.' . pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
+            $target_file = $target_dir . $product->name . '.' . pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION);
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
                     $product->image = basename($target_file);
             } else {
-                    header("Location: ../../Frontend/AdminPages/add-product.php?errorCode=5&errorDesc=File upload failed!");
+                    header("Location: ../../Frontend/Pages/AdminPages/add-products.php?errorCode=5&errorDesc=File upload failed!");
                     exit();
             }
             if (addProduct($db, $product)) {
-                header("Location: ../../Frontend/AdminPages/add-product.php?errorCode=5&errorDesc=Product Added Sucessfully!");
+                header("Location: ../../Frontend/Pages/AdminPages/add-products.php?errorCode=5&errorDesc=Product Added Sucessfully!");
             } else {
-                header("Location: ../../Frontend/AdminPages/add-product.php?errorCode=5&errorDesc=Product Adding Failed!");
+                header("Location: ../../Frontend/Pages/AdminPages/add-products.php?errorCode=5&errorDesc=Product Adding Failed!");
             }
             break;
 
@@ -100,15 +101,27 @@ if (isset($_POST["action"])) {
             
                     $result = deleteProduct($id, $db);
                     if ($result == 1) {
-                        header("Location: ../../Frontend/AdminPages/view-products.php?successCode=1&successDesc=Product deleted successfully!");
+                        header("Location: ../../Frontend/Pages/AdminPages/view-products.php?successCode=1&successDesc=Product deleted successfully!");
                     } else {
-                        header("Location: ../../Frontend/AdminPages/view-products.php?errorCode=6&errorDesc=Product deletion failed!");
+                        header("Location: ../../Frontend/Pages/AdminPages/view-products.php?errorCode=6&errorDesc=Product deletion failed!");
                     }
                 } else {
-                   header("Location: ../../Frontend/AdminPages/view-products.php?errorCode=7&errorDesc=No product ID provided!");
+                   header("Location: ../../Frontend/Pages/AdminPages/view-products.php?errorCode=7&errorDesc=No product ID provided!");
                 }
                 break;
-
+            case "CHANGEACTIVATIONSTATUS":
+                if(isset($_POST['id'])){
+                    $id = $_POST['id'];
+                    $productDetails = getProductDetails($id, $db);
+                    $is_active = $productDetails['IS_ACTIVE'];
+                    $is_active = ($is_active == 1) ? 0 : 1;
+                    $result = changeActivationStatus($id, $is_active, $db);
+                    if ($result == 1) {
+                        header("Location: ../../Frontend/Pages/AdminPages/view-products.php?successCode=1&successDesc=Product status changed successfully!");
+                    } else {
+                        header("Location: ../../Frontend/Pages/AdminPages/view-products.php?errorCode=6&errorDesc=Product status change failed!");
+                    }
+                }
         default:
             break;
     }
