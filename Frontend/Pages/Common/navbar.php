@@ -1,45 +1,7 @@
 <?php
 
-function userNavbar($activePage) {
-    // Base path needs to be dynamic based on whether the active page is 'home'
-    // If 'home', no additional path needed for root, else adjust for nested pages
-    $basePath = ($activePage == 'home') ? "/" : "/Frontend/Pages/";
 
-    ?>
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- Logo, always relative to the domain root -->
-                        <a href="<?php echo ($activePage == 'home') ? '/' : '/Frontend/Pages/'; ?>index.php" class="logo">
-                            <img src="<?php echo ($activePage == 'home') ? '/Frontend/Assets/CSS/LOGO Small.jpeg' : '../Assets/CSS/LOGO Small.jpeg'; ?>" alt="Logo" style="width: 158px;">
-                        </a>
-                        <!-- Navigation -->
-                        <ul class="nav">
-                            <li><a href="/index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
-                            <li><a href="/Frontend/Pages/shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
-                            <li><a href="/Frontend/Pages/about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
-                            <li><a href="/Frontend/Pages/aboutus.php" <?php echo ($activePage == 'aboutus') ? 'class="active"' : ''; ?>>About Us</a></li>
-                            <li><a href="/Frontend/Pages/contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
-                            <li><a href="/Frontend/Pages/signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
-                        </ul>   
-                        <!-- Menu Trigger -->
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <?php
-}
-
-
-
-
-function userNavbar1($activePage){
+function userNavbar($activePage){
   // Determine the base path for links based on the active page
   $basePath = ($activePage == 'Home') ? "../Final/Frontend/Pages/" : "./";
   $homePath = ($activePage == 'Home') ? "index.php" : "../../index.php";
@@ -56,11 +18,10 @@ function userNavbar1($activePage){
                       </a>
                       <!-- Navigation -->
                       <ul class="nav">
-                          <li><a href="<?php echo $homePath; ?>" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
-                          <li><a href="<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
-                          <li><a href="<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'product-details') ? 'class="active"' : ''; ?>>Product Details</a></li>
+                          <li><a href="<?php echo $homePath; ?>" <?php echo ($activePage == 'Home') ? 'class="active"' : ''; ?>>Home</a></li>
+                          <li><a href="<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About Us</a></li>
                           <li><a href="<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
-                          <li><a href="<?php echo $basePath; ?>signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
+                          <li><a href="<?php echo $basePath; ?>login.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
                       </ul>   
                       <!-- Menu Trigger -->
                       <a class='menu-trigger'>
@@ -95,44 +56,20 @@ function AdminNavbar($activePage){
           <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="../../AdminAssets/Images/ProfilePictures/<?php echo $_SESSION['ProfilePicture']; ?>" alt="Profile" class="rounded-circle">
               <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li class="dropdown-header">
-              <h6>Admin</h6>
+              <h6><?php echo $_SESSION['firstname'] . " " . $_SESSION['lastname']; ?></h6>
               </li>
               <li>
               <hr class="dropdown-divider">
               </li>
 
               <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i class="bi bi-person"></i>
-                  <span>My Profile</span>
-              </a>
-              </li>
-              <li>
-              <hr class="dropdown-divider">
-              </li>
-
-              <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                  <i class="bi bi-gear"></i>
-                  <span>Account Settings</span>
-              </a>
-              </li>
-              <li>
-              <hr class="dropdown-divider">
-              </li>
-
-              <li>
-              <hr class="dropdown-divider">
-              </li>
-
-              <li>
-              <a class="dropdown-item d-flex align-items-center" href="../../index.php">
+              <a class="dropdown-item d-flex align-items-center" href="../../../index.php">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
               </a>

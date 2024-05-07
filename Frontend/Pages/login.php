@@ -3,7 +3,7 @@ session_start();
 session_unset();
 session_destroy();
 
-require_once("../Views/userView.php");
+require_once("../Views/adminView.php");
 require_once("../Controllers/userController.php");
 
 ?>

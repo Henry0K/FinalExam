@@ -32,7 +32,7 @@
 <head>
 <body>
 
-    <?php AdminNavbar('Add Product'); ?>
+    <?php AdminNavbar('Add Products'); ?>
 
     <main id="main" class="main">
         <div class="pagetitle">

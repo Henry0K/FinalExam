@@ -53,18 +53,18 @@
 
 
  <!-- Vendor JS Files -->
- <script src="../AdminAssets/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="../AdminAssets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../AdminAssets/vendor/chart.js/chart.umd.js"></script>
-        <script src="../AdminAssets/vendor/echarts/echarts.min.js"></script>
-        <script src="../AdminAssets/vendor/quill/quill.js"></script>
-        <script src="../AdminAssets/vendor/simple-datatables/simple-datatables.js"></script>
-        <script src="../AdminAssets/vendor/tinymce/tinymce.min.js"></script>
-        <script src="../AdminAssets/vendor/php-email-form/validate.js"></script>
+ <script src="../../AdminAssets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="../../AdminAssets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../AdminAssets/vendor/chart.js/chart.umd.js"></script>
+        <script src="../../AdminAssets/vendor/echarts/echarts.min.js"></script>
+        <script src="../../AdminAssets/vendor/quill/quill.js"></script>
+        <script src="../../AdminAssets/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="../../AdminAssets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="../../AdminAssets/vendor/php-email-form/validate.js"></script>
 
 
         <!-- Template Main JS File -->
-        <script src="../AdminAssets/js/main.js"></script>
+        <script src="../../AdminAssets/js/main.js"></script>
 
 </body>
 

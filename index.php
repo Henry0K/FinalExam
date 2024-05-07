@@ -39,7 +39,7 @@
 
   <!-- ***** Header Area Start ***** -->
     <?php 
-        userNavbar1("Home");?>
+        userNavbar("Home");?>
   <!-- ***** Header Area End ***** -->
 
     

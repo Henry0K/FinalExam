@@ -65,7 +65,7 @@ https://templatemo.com/tm-589-lugx-gaming
 
 
 <?php
-    userNavbar1("Shop");
+    userNavbar("Shop");
     $productID = $_GET['productID'];
     $product = getProductByID($productID);
     displayProductDetails($product);

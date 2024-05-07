@@ -1,7 +1,6 @@
 <?php
 
 
-
 /**
  * @param $username
  * @param $password
@@ -10,7 +9,7 @@
  */
 
 function Login($username, $password, $db){
-    $query = "SELECT ID, ProfilePicture, FirstName, LastName FROM Users WHERE Username = '$username' AND Password = '$password'";
+    $query = "SELECT ID, ProfilePicture, FirstName, LastName FROM Users WHERE Username = '$username' AND Password = PASSWORD('$password')";
     $stmt = $db->query($query);
     if ($stmt->rowCount() > 0) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,22 +22,38 @@ function Login($username, $password, $db){
 
 
 
-
+/**
+ * Retrieves all distinct product categories that are active.
+ * 
+ * @return array Returns an array of active product categories.
+ */
 function getAllProductCategories(){
     $db = require("./Backend/Common/Dbconfig.php");
-    $query = "SELECT DISTINCT CATEGORY FROM Products";
+    $query = "SELECT DISTINCT CATEGORY FROM Products WHERE IS_ACTIVE = 1";
     $stmt = $db->query($query);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
+/**
+ * Fetches all products that belong to a specific category and are active.
+ * 
+ * @param string $category The category to filter products by.
+ * @return array Returns an array of products within the specified category.
+ */
 function getProductsByCategory($category){
     $db = require("./Backend/Common/Dbconfig.php");
-    $query = "SELECT * FROM Products WHERE CATEGORY = '$category'";
+    $query = "SELECT * FROM Products WHERE CATEGORY = '$category' AND IS_ACTIVE = 1";
     $stmt = $db->query($query);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+/**
+ * Retrieves product details based on the product ID.
+ * 
+ * @param int $productID Product ID
+ * @return array Associative array containing product details
+ */
 function getProductByID($productID){
     $db = require("../../Backend/Common/Dbconfig.php");
     $query = "SELECT * FROM Products WHERE ID = '$productID'";
@@ -46,11 +61,17 @@ function getProductByID($productID){
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-
-function insertContact($phone, $email, $subject, $body) {
-    
-        $sql = "INSERT INTO table_contacts (phone, email, subject, message) VALUES ('$phone', '$email', '$subject', '$body')";
-        $conn->query($sql);
-
-        return true;
+/**
+ * Inserts a new contact message into the database.
+ * 
+ * @param string $phone The phone number of the contact.
+ * @param string $email The email address of the contact.
+ * @param string $subject The subject of the contact message.
+ * @param string $body The body of the contact message.
+ * @return bool Returns true on successful insertion.
+ */
+function insertContact($contact, $db) {
+        $sql = "INSERT INTO table_contacts (Phone, Email, Subject, Body, ContactDate) VALUES ('$contact->phone', '$contact->email', '$contact->subject', '$contact->body', NOW())";
+        $stmt = $db->query($sql);
+        return $stmt->rowCount() > 0 ? true : false;
 }

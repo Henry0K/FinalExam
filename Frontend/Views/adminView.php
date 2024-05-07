@@ -1,5 +1,43 @@
 <?php
 
+/**
+ * This function is used to display the login form
+ * @return void
+ * 
+ */
+
+ function LoginForm(){
+  ?>
+
+  <div class="container mt-5">
+      <div class="row justify-content-center">
+          <div class="col-lg-6"> 
+  
+              <div class="card shadow-lg p-5 bg-white rounded"> 
+                  <div class="card-body">
+                      <h3 class="card-title text-center mb-4">Login to Your Account</h3> 
+                      <form class="form-container" id="login-form" action="../../Backend/Controllers/adminController.php" method="post">
+                          <input type="hidden" name="action" value="LOGIN">
+                          <div class="form-group mb-4"> 
+                              <label for="username" class="h5 text-left">Username</label> 
+                              <input class="form-control form-control-lg" id="username" type="text" name="username" placeholder="Enter your username" required> 
+                          </div>
+                          <div class="form-group mb-4">
+                              <label for="password" class="h5 text-left">Password</label> 
+                              <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Enter your password" required>
+                          </div>
+                          <div class="form-group">
+                              <input class="btn btn-primary btn-lg btn-block" type="submit" name="login" value="Login"> 
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <?php
+}
+
     function displayAddProductForm(){
         ?>
         <form action="../../../Backend/Controllers/adminController.php"  class="row g-3 mt-5 mx-5" method="post" enctype="multipart/form-data">
@@ -67,13 +105,13 @@
           <div class="row mb-3">
               <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
               <div class="col-sm-10">
-                  <input type="text" name="firstName" placeholder="Enter First Name" class="form-control" required>
+                  <input type="text" name="firstname" placeholder="Enter First Name" class="form-control" required>
               </div>
           </div>
           <div class="row mb-3">
               <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
               <div class="col-sm-10">
-                  <input type="text" name="lastName" placeholder="Enter Last Name" class="form-control" required>
+                  <input type="text" name="lastname" placeholder="Enter Last Name" class="form-control" required>
               </div>
           </div>
           <div class="row mb-3">
@@ -187,7 +225,7 @@
             <h5 class="modal-title">Edit Product</h5>
             <button type="button" class="btn-close" onclick="document.getElementById('editProductForm').style.display='none';"></button>
           </div>
-          <form method="post" action="../../Backend/Controllers/adminController.php" class="form-group" enctype="multipart/form-data">
+          <form method="post" action="../../../Backend/Controllers/adminController.php" class="form-group" enctype="multipart/form-data">
             <div class="modal-body">
               <input type="hidden" name="action" value="UPDATEPRODUCT">
               <input type="hidden" name="id" id="editProductId">
@@ -207,10 +245,6 @@
                 <label for="editProductDescription" class="form-label">Description</label>
                 <input type="text" name="description" id="editProductDescription" class="form-control">
               </div>
-              <div class="mb-3">
-                <label for="editProductImage" class="form-label">Image</label>
-                <input type="file" name="image" id="editProductImage" class="form-control">
-              </div>
             </div>
             <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update Product</button>
@@ -222,24 +256,156 @@
 </div>
 <?php
 }
-?>
 
+
+
+
+
+
+function displayUsers($users){
   ?>
-  <script>
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">User List</h5>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">First Name</th>
+                      <th scope="col">Last Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Profile Picture</th>
+                      <th scope="col">Active Status</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <?php foreach($users as $user): ?>
+                  <tr>
+                      <th scope="row"><?php echo $user['ID']; ?></th>
+                      <td><?php echo $user['Username']; ?></td>
+                      <td><?php echo $user['FirstName']; ?></td>
+                      <td><?php echo $user['LastName']; ?></td>
+                      <td><?php echo $user['Email']; ?></td>
+                      <td><img src="<?php echo '../../AdminAssets/Images/ProfilePictures/'.$user['ProfilePicture']; ?>" alt="Profile Picture" width="100" height="100"></td>
+                      <td><?php echo $user['ActiveStatus']; ?></td>
+                      <td><?php echo $user['Gender']; ?></td>
+                      <td><?php echo $user['Age']; ?></td>
+                      <td>
+                          <button type="button" class="btn btn-primary" onclick="showEditFormUser(<?php echo htmlspecialchars(json_encode($user)); ?>)">Edit</button>
+                      </td>
+                      <td>
+                          <form method="post" action="../../../Backend/Controllers/adminController.php">
+                              <input type="hidden" name="action" value="DELETEUSER">
+                              <input type="hidden" name="ID" value="<?php echo $user['ID']; ?>">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+                  <?php endforeach; ?>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <?php
+}
+
+function showEditUser(){
+  ?>
+  <div id="editUserForm" class="modal" tabindex="-1" style="display:none;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Edit User</h5>
+          <button type="button" class="btn-close" onclick="document.getElementById('editUserForm').style.display='none';"></button>
+        </div>
+        <form method="post" action="../../../Backend/Controllers/adminController.php" class="form-group" enctype="multipart/form-data">
+          <div class="modal-body">
+            <input type="hidden" name="action" value="UPDATEUSER">
+            <input type="hidden" name="ID" id="editUserId">
+            <div class="mb-3">
+              <label for="editUsername" class="form-label">Username</label>
+              <input type="text" name="username" id="editUsername" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editFirstName" class="form-label">First Name</label>
+              <input type="text" name="firstname" id="editFirstName" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editLastName" class="form-label">Last Name</label>
+              <input type="text" name="lastname" id="editLastName" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editEmail" class="form-label">Email</label>
+              <input type="email" name="email" id="editEmail" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editProfilePicture" class="form-label">Profile Picture</label>
+              <input type="file" name="profilePicture" id="editProfilePicture" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editGender" class="form-label">Gender</label>
+              <select name="gender" id="editGender" class="form-control">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editAge" class="form-label">Age</label>
+              <input type="number" name="age" id="editAge" class="form-control">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Update User</button>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('editUserForm').style.display='none';">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <?php
+}
+?>
+<script>
+    function showEditFormUser(user) {
+      document.getElementById('editUserId').value = user.ID;
+      document.getElementById('editUsername').value = user.Username;
+      document.getElementById('editFirstName').value = user.FirstName;
+      document.getElementById('editLastName').value = user.LastName;
+      document.getElementById('editEmail').value = user.Email;
+      var genderSelect = document.getElementById('editGender');
+      var options = genderSelect.options;
+      for (var i = 0; i < options.length; i++) {
+        if (options[i].value === user.Gender) {
+          genderSelect.selectedIndex = i;
+          break;
+        }
+      }
+      document.getElementById('editAge').value = user.Age;
+      var imageElement = document.getElementById('currentProfilePicture');
+      if (imageElement) {
+        imageElement.src = '../AdminAssets/Images/ProfilePictures/' + user.ProfilePicture;
+        imageElement.alt = 'Current Profile Picture';
+      }
+      document.getElementById('editUserForm').style.display = 'block';
+    }
+
       function showEditForm(product) {
         document.getElementById('editProductId').value = product.ID;
         document.getElementById('editProductName').value = product.PRODUCT;
         document.getElementById('editProductPrice').value = product.PRICE;
         document.getElementById('editProductCategory').value = product.CATEGORY;
         document.getElementById('editProductDescription').value = product.DESCRIPTION;
-        var imageElement = document.getElementById('currentProductImage');
-        if (imageElement) {
-          imageElement.src = '../AdminAssets/Images/ProductImages/' + product.IMAGE;
-          imageElement.alt = 'Current Product Image';
-        }
         document.getElementById('editProductForm').style.display = 'block';
       }
   </script>
+
+
   <?php
 
 ?>

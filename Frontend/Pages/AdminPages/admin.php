@@ -36,10 +36,9 @@
 
     <main id="main" class="main">
             <div class="pagetitle">
-                <h1 class="text-center">View Users</h1>
+                <h1 class="text-center">Dashboard</h1>
             </div><!-- End Page Title -->
-
-            <section class="section">
+            <section class="section dashboard">
                 <div class="row">
                     <div class="col-lg-12">
                     </div>
