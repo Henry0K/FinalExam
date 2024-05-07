@@ -1,6 +1,9 @@
 <?php
     require_once("./Frontend/Pages/Common/navbar.php");
     require_once("./Frontend/Pages/Common/footer.php");
+    require_once("Frontend/Views/userView.php");
+    require_once("Backend/Models/userModel.php");
+
 
 ?>
 <html>
@@ -36,7 +39,7 @@
 
   <!-- ***** Header Area Start ***** -->
     <?php 
-        userNavbar("Home");?>
+        userNavbar1("Home");?>
   <!-- ***** Header Area End ***** -->
 
     
@@ -69,43 +72,35 @@
     
   <div class="features">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-stretch"> 
             <div class="col-lg-3 col-md-6">
-                <a href="#">
-                    <div class="item">
-                        <div class="image text-center">
-                            <i class="fas fa-mobile-alt fa-3x"></i>
-                        </div>
+                <a href="#" class="d-flex flex-column h-100">
+                    <div class="item flex-grow-1"> 
+                        <img src="./Frontend/Assets/assets/images/phoness.jpeg" alt="Smartphones" class="img-fluid">
                         <h4>Smartphones and Accessories</h4>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="#">
-                    <div class="item">
-                        <div class="image text-center">
-                            <i class="fas fa-tablet-alt fa-3x"></i>
-                        </div>
+                <a href="#" class="d-flex flex-column h-100">
+                    <div class="item flex-grow-1">
+                        <img src="./Frontend/Assets/assets/images/tablets.jpeg" alt="Tablets" class="img-fluid">
                         <h4>Tablets and Portable Computing</h4>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="#">
-                    <div class="item">
-                        <div class="image text-center">
-                            <i class="fas fa-laptop fa-3x"></i>
-                        </div>
+                <a href="#" class="d-flex flex-column h-100">
+                    <div class="item flex-grow-1">
+                        <img src="./Frontend/Assets/assets/images/laptops.jpg" alt="Laptops" class="img-fluid">
                         <h4>Laptops and Desktop Computers</h4>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <a href="#">
-                    <div class="item">
-                        <div class="image text-center">
-                            <i class="fas fa-home fa-3x"></i>
-                        </div>
+                <a href="#" class="d-flex flex-column h-100">
+                    <div class="item flex-grow-1">
+                        <img src="./Frontend/Assets/assets/images/smarthome.jpg" alt="Smart Home" class="img-fluid">
                         <h4>Smart Home Devices</h4>
                     </div>
                 </a>
@@ -113,6 +108,16 @@
         </div>
     </div>
 </div>
+
+
+
+<?php
+    
+    getAllProducts(getAllProductCategories());
+
+?>
+
+
 
 
   <?php 

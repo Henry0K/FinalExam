@@ -15,7 +15,7 @@
                         </a>
                         <!-- Navigation -->
                         <ul class="nav">
-                            <li><a href="/Final<?php echo $basePath; ?>index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
+                            <li><a href="/Final/index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
                             <li><a href="/Final<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
                             <li><a href="/Final<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
                             <li><a href="/Final<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'Contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
@@ -33,7 +33,40 @@
     <?php
 }
 
+function userNavbar1($activePage){
+  // Determine the base path for links based on the active page
+  $basePath = ($activePage == 'Home') ? "../Final/Frontend/Pages/" : "./";
+  $homePath = ($activePage == 'Home') ? "index.php" : "../../index.php";
 
+  ?>
+  <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- Logo, always relative to the domain root -->
+                      <a href="<?php echo $homePath; ?>" class="logo">
+                          <img src="<?php echo $basePath; ?>assets/images/logo.png" alt="" style="width: 158px;">
+                      </a>
+                      <!-- Navigation -->
+                      <ul class="nav">
+                          <li><a href="<?php echo $homePath; ?>" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
+                          <li><a href="<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
+                          <li><a href="<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'product-details') ? 'class="active"' : ''; ?>>Product Details</a></li>
+                          <li><a href="<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
+                          <li><a href="<?php echo $basePath; ?>signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
+                      </ul>   
+                      <!-- Menu Trigger -->
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <?php
+}
 
 
 
@@ -128,7 +161,7 @@ function AdminNavbar($activePage){
               </a>
           </li>
           <li>
-              <?php echo ($activePage == 'View Blogs') ? '<a href="#" class="active">' : '<a href="./view-products.php">'; ?>
+              <?php echo ($activePage == 'View Products') ? '<a href="#" class="active">' : '<a href="./view-products.php">'; ?>
               <i class="bi bi-circle"></i><span>View Products</span>
               </a>
           </li>
@@ -136,17 +169,22 @@ function AdminNavbar($activePage){
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-          <a class="nav-link <?php echo ($activePage ==  'View Users') ? '' : 'collapsed'; ?>" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#" <?php echo ($activePage == 'View Users') ? 'aria-expanded="true"' : 'aria-expanded="false"'; ?>>
+          <a class="nav-link <?php echo ($activePage == 'Add Users') || ($activePage == 'View Users') ? '' : 'collapsed'; ?>" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#" <?php echo ($activePage == 'Add Users') || ($activePage == 'View Users') ? 'aria-expanded="true"' : 'aria-expanded="false"'; ?>>
           <i class="bi bi-menu-button-wide"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
           </a>
-          <ul id="users-nav" class="nav-content collapse <?php echo ($activePage == 'View Users') ? 'show' : ''; ?>" data-bs-parent="#sidebar-nav">
+          <ul id="users-nav" class="nav-content collapse <?php echo ($activePage == 'Add Users') || ($activePage == 'View Users') ? 'show' : ''; ?>" data-bs-parent="#sidebar-nav">
+          <li>
+              <?php echo ($activePage == 'Add Users') ? '<a href="#" class="active">' : '<a href="./add-users.php">'; ?>
+              <i class="bi bi-circle"></i><span>Add Users</span>
+              </a>
+          </li>
           <li>
               <?php echo ($activePage == 'View Users') ? '<a href="#" class="active">' : '<a href="./view-users.php">'; ?>
               <i class="bi bi-circle"></i><span>View Users</span>
               </a>
           </li>
           </ul>
-      </li><!-- End Users Nav -->
+      </li><!-- End Components Nav -->
 
       </ul>
   </aside><!-- End Sidebar-->

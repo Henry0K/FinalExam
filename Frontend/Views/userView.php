@@ -1,8 +1,10 @@
 <?php
 
+
 /**
  * This function is used to display the login form
  * @return void
+ * 
  */
 function LoginForm(){
     ?>
@@ -66,5 +68,47 @@ function SignUpForm(){
 }
 
 
+function getAllProducts($categories){
+  ?>
+  <div class="section trending">
+      <div class="container">
+          <?php foreach ($categories as $category): ?>
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="section-heading">
+                          <h2><?= htmlspecialchars($category['CATEGORY']) ?></h2>
+                      </div>
+                  </div>
+                  <div class="col-lg-12">
+                      <div class="main-button">
+                          <a href="shop.html">View All</a>
+                      </div>
+                  </div>
+                  <?php
+                  $products = getProductsByCategory($category['CATEGORY']);
+                  foreach ($products as $product):
+                  ?>
+                      <div class="col-lg-3 col-md-6">
+                          <div class="item">
+                              <div class="thumb">
+                              <?php
+                               echo '<img src="./Frontend/AdminAssets/Images/ProductImages/' . htmlspecialchars($product['IMAGE']) . '" alt="' . htmlspecialchars($product['PRODUCT']) . '" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;">';
+                              ?>
+                                  <span class="price"><?= htmlspecialchars($product['PRICE']) ?></span>
+                              </div>
+                              <div class="down-content">
+                                  <span class="category"><?= htmlspecialchars($product['CATEGORY']) ?></span>
+                                  <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
+                                  <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                  <?php endforeach; ?>
+              </div>
+          <?php endforeach; ?>
+      </div>
+  </div>
+  <?php
+}
 ?>
-?>
+  

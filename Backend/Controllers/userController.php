@@ -41,7 +41,6 @@ if (isset($_POST["action"])) {
                 $user->password = $_POST["password"];
                 $user->gender = ($_POST["gender"] == "Male") ? 'M' : 'F';
                 $user->age = $_POST["age"];
-                $user->role = $_POST["role"];
 
                 $target_dir = "../../Frontend/AdminAssets/Images/ProfilePictures/";
                 $target_file = $target_dir . $user->username . '.' . pathinfo($_FILES["profilePicture"]["name"], PATHINFO_EXTENSION);
@@ -76,13 +75,25 @@ if (isset($_POST["action"])) {
                     $_SESSION["ProfilePicture"] = $array["ProfilePicture"];
                     $_SESSION["firstname"] = $array["FirstName"];
                     $_SESSION["lastname"] = $array["LastName"];
-                    if ($_SESSION["Role"] == "Admin")
                         header("Location: ../../Frontend/Pages/AdminPages/admin.php");
-                } else {
-                    header("Location: ../../Frontend/Pages/login.php?errorCode=2&errorDesc=Invalid username or password!");
                 }
             }
-            break;            
+            break; 
+            
+            case "CONTACT":
+                $phone = $_POST['phone'];
+                $email = $_POST['email'];
+                $subject = $_POST['subject'];
+                $body = $_POST['body'];
+            
+                $result = insertContact($phone, $email, $subject, $body);
+            
+                if ($result) {
+                    header('Location: contact.php?status=success');
+                } else {
+                    header('Location: contact.php?status=error');
+                }
+                break;    
         default:
             header("Location: ../../index.php?errorCode=3&errorDesc=Invalid action!");
             break;

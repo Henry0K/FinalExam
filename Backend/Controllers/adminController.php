@@ -122,6 +122,27 @@ if (isset($_POST["action"])) {
                         header("Location: ../../Frontend/Pages/AdminPages/view-products.php?errorCode=6&errorDesc=Product status change failed!");
                     }
                 }
+            break;
+
+        case "ADDUSER":
+            $user = new stdClass();
+            $user->username = $_POST["username"];
+            $user->firstname = $_POST["firstname"];
+            $user->lastname = $_POST["lastname"];
+            $user->email = $_POST["email"];
+            $user->password = $_POST["password"];
+            $user->gender = $_POST["gender"];
+            $user->age = $_POST["age"];
+            $user->profilePicture = $_POST["profilePicture"];
+            $user->activeStatus = 1;
+
+            if (addUser($db, $user)) {
+                header("Location: ../../Frontend/AdminPages/view-users.php?successCode=1&successDesc=User added successfully!");
+            } else {
+                header("Location: ../../Frontend/AdminPages/view-users.php?errorCode=6&errorDesc=User addition failed!");
+            }
+
+            break;
         default:
             break;
     }
