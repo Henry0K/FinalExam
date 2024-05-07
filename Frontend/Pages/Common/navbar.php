@@ -1,6 +1,8 @@
 <?php
 
-    function userNavbar($activePage){
+function userNavbar($activePage) {
+    // Base path needs to be dynamic based on whether the active page is 'home'
+    // If 'home', no additional path needed for root, else adjust for nested pages
     $basePath = ($activePage == 'home') ? "/" : "/Frontend/Pages/";
 
     ?>
@@ -10,16 +12,17 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- Logo, always relative to the domain root -->
-                        <a href="<?php echo $basePath; ?>index.php" class="logo">
-                            <img src="<?php echo $basePath; ?>./Frontend/Assets/assets/CSS/LOGO Small.jpeg" alt="" style="width: 158px;">
+                        <a href="<?php echo ($activePage == 'home') ? '/' : '/Frontend/Pages/'; ?>index.php" class="logo">
+                            <img src="<?php echo ($activePage == 'home') ? '/Frontend/Assets/CSS/LOGO Small.jpeg' : '../Assets/CSS/LOGO Small.jpeg'; ?>" alt="Logo" style="width: 158px;">
                         </a>
                         <!-- Navigation -->
                         <ul class="nav">
-                            <li><a href="/Final/index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
-                            <li><a href="/Final<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
-                            <li><a href="/Final<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
-                            <li><a href="/Final<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'Contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
-                            <li><a href="/Final<?php echo $basePath; ?>signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
+                            <li><a href="/index.php" <?php echo ($activePage == 'home') ? 'class="active"' : ''; ?>>Home</a></li>
+                            <li><a href="/Frontend/Pages/shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Our Shop</a></li>
+                            <li><a href="/Frontend/Pages/about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About</a></li>
+                            <li><a href="/Frontend/Pages/aboutus.php" <?php echo ($activePage == 'aboutus') ? 'class="active"' : ''; ?>>About Us</a></li>
+                            <li><a href="/Frontend/Pages/contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
+                            <li><a href="/Frontend/Pages/signin.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
                         </ul>   
                         <!-- Menu Trigger -->
                         <a class='menu-trigger'>
@@ -32,6 +35,9 @@
     </header>
     <?php
 }
+
+
+
 
 function userNavbar1($activePage){
   // Determine the base path for links based on the active page

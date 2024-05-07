@@ -52,7 +52,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <?php    
-                        displayUsers();
+                        $users = getUsers();
+                        displayUsers($users);
                         showEditUser();
                     ?>
                 </div>

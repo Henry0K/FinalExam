@@ -39,11 +39,17 @@ function getProductsByCategory($category){
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getProductByID($productID){
+    $db = require("../../Backend/Common/Dbconfig.php");
+    $query = "SELECT * FROM Products WHERE ID = '$productID'";
+    $stmt = $db->query($query);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 
 function insertContact($phone, $email, $subject, $body) {
+    
         $sql = "INSERT INTO table_contacts (phone, email, subject, message) VALUES ('$phone', '$email', '$subject', '$body')";
-        
-        // Use query when you are not worried about SQL injection or are using fixed values
         $conn->query($sql);
 
         return true;

@@ -89,9 +89,9 @@ if (isset($_POST["action"])) {
                 $result = insertContact($phone, $email, $subject, $body);
             
                 if ($result) {
-                    header('Location: contact.php?status=success');
+                    header('Location: ../../Frontend/Pages/contact.php?status=success');
                 } else {
-                    header('Location: contact.php?status=error');
+                    header('Location: ../../Frontend/Pages/contact.php?status=error');
                 }
                 break;    
         default:

@@ -92,7 +92,7 @@ function getAllProducts($categories){
                           <div class="item">
                               <div class="thumb">
                               <?php
-                               echo '<img src="./Frontend/AdminAssets/Images/ProductImages/' . htmlspecialchars($product['IMAGE']) . '" alt="' . htmlspecialchars($product['PRODUCT']) . '" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;">';
+                               echo '<a href="./Frontend/Pages/shop.php?productID=' . htmlspecialchars($product['ID']) . '"><img src="./Frontend/AdminAssets/Images/ProductImages/' . htmlspecialchars($product['IMAGE']) . '" alt="' . htmlspecialchars($product['PRODUCT']) . '" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;"></a>';
                               ?>
                                   <span class="price"><?= htmlspecialchars($product['PRICE']) ?></span>
                               </div>
@@ -108,6 +108,32 @@ function getAllProducts($categories){
           <?php endforeach; ?>
       </div>
   </div>
+  <?php
+}
+
+function displayProductDetails($product){
+  ?>
+  <main id="main">
+      <section class="single-post-content">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-9 post-content" data-aos="fade-up">
+                      <!-- ======= Single Post Content ======= -->
+                      <div class="single-post">
+                          <div class="post-meta">
+                              <span class="date"><?= $product['CATEGORY'] ?></span>
+                              <span class="mx-1">&bullet;</span>
+                          </div>
+                          <h1 class="mb-5"><?= $product['PRODUCT'] ?></h1>
+                          <img src="../AdminAssets/Images/ProductImages/<?= $product['IMAGE'] ?>" alt="" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;">
+                          <p><?= $product['DESCRIPTION'] ?></p>
+                      </div><!-- End Single Post Content -->
+
+                  </div>
+              </div>
+          </div>
+      </section>
+  </main><!-- End #main -->
   <?php
 }
 ?>

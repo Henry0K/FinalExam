@@ -1,8 +1,5 @@
 
-<?php 
-   require_once("./Common/navbar.php");
 
-?>
    
    <!DOCTYPE html>
 <html lang="en">
@@ -36,11 +33,11 @@
     </style>
 </head>
 <body>
-    <?php require_once("./Common/navbar.php"); userNavbar1("Contact"); ?>
+    <?php require_once("./Common/navbar.php"); userNavbar("Contact"); ?>
 
     <div class="container push-down-container" >
         <h2>Contact Us</h2>
-        <form action="userController.php" method="post">
+    <form action="../../Backend/Controllers/userController.php" method="post">
     <input type="hidden" name="form_type" value="CONTACT">
     <div class="mb-3">
         <label for="phone" class="form-label">Phone</label>
