@@ -63,7 +63,7 @@ if (isset($_POST["action"])) {
             break;
         case "LOGIN":
             if (isMissingArgsLogin()) {
-                header("Location: ../../index.php?errorCode=1&errorDesc=Missing arguments");
+                header("Location: ../../Frontend/Pages/login.php?errorCode=1&errorDesc=Missing arguments");
                 exit();
             } else {
                 $username = $_POST["username"];
@@ -77,11 +77,9 @@ if (isset($_POST["action"])) {
                     $_SESSION["firstname"] = $array["FirstName"];
                     $_SESSION["lastname"] = $array["LastName"];
                     if ($_SESSION["Role"] == "Admin")
-                        header("Location: ../../Frontend/Pages/admin.php");
-                    else if ($_SESSION["Role"] == "User")
-                        header("Location: ../../Frontend/Pages/home.php");
+                        header("Location: ../../Frontend/Pages/AdminPages/admin.php");
                 } else {
-                    header("Location: ../../index.php?errorCode=2&errorDesc=Invalid username or password!");
+                    header("Location: ../../Frontend/Pages/login.php?errorCode=2&errorDesc=Invalid username or password!");
                 }
             }
             break;            

@@ -6,14 +6,37 @@
  */
 function LoginForm(){
     ?>
-    <form class="form-container" id="login-form" action="Backend/Controllers/userController.php" method="post">
-        <input type="hidden" name="action" value="LOGIN">
-        <input class="input-field" type="text" name="username" placeholder="Username">
-        <input class="input-field" type="password" name="password" placeholder="Password">
-        <input class="input-field" type="submit" name="login" value="Login">
-    </form>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6"> 
+    
+                <div class="card shadow-lg p-5 bg-white rounded"> 
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Login to Your Account</h3> 
+                        <form class="form-container" id="login-form" action="../../Backend/Controllers/userController.php" method="post">
+                            <input type="hidden" name="action" value="LOGIN">
+                            <div class="form-group mb-4"> 
+                                <label for="username" class="h5 text-left">Username</label> 
+                                <input class="form-control form-control-lg" id="username" type="text" name="username" placeholder="Enter your username" required> 
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="password" class="h5 text-left">Password</label> 
+                                <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-primary btn-lg btn-block" type="submit" name="login" value="Login"> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
 }
+
+
 
 /**
  * This function is used to display the sign up form
@@ -43,4 +66,5 @@ function SignUpForm(){
 }
 
 
+?>
 ?>

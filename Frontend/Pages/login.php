@@ -5,13 +5,14 @@ session_destroy();
 
 require_once("../Views/userView.php");
 require_once("../Controllers/userController.php");
+
 ?>
 <html>
     <head>
 
     <!-- LINK TO TEMPLATE ASSETS -->
         <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../Assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
         <!-- Additional CSS Files -->
@@ -25,7 +26,6 @@ require_once("../Controllers/userController.php");
     <body>
         <center>
             <h1 class="title" style="margin-top: 50px;">Login</h1>
-            <h3>Don't have an account? <a href="./signup.php">Sign Up</a></h3>
             <div class="login-container">
                 <?php 
                     LoginForm();

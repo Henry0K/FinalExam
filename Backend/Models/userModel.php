@@ -2,7 +2,7 @@
 
 require_once("../../Backend/Common/Dbconfig.php");
 
-//Php doc
+
 /**
  * @param $user
  * @param $db
