@@ -3,6 +3,7 @@
     require_once("./Frontend/Pages/Common/footer.php");
     require_once("Frontend/Views/userView.php");
     require_once("Backend/Models/userModel.php");
+    require_once("./Frontend/Controllers/userController.php");
 
 
 ?>
@@ -39,10 +40,12 @@
 
   <!-- ***** Header Area Start ***** -->
     <?php 
-        userNavbar("Home");?>
+    displayCart();
+    cartScripts();
+    userNavbar("Home");?>
   <!-- ***** Header Area End ***** -->
 
-    
+
   <div class="main-banner">
     <div class="container">
       <div class="row">

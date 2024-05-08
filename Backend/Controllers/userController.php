@@ -39,7 +39,34 @@ if (isset($_POST["action"])) {
                 } else {
                     header('Location: ../../Frontend/Pages/contact.php?status=error');
                 }
-                break;    
+            break;    
+
+            case "CHECKOUT":
+                    // Create a new customer
+                    $customer = new stdClass();
+                    $customer->name = $_POST['firstName'] . ' ' . $_POST['lastName'];
+                    $customer->address = $_POST['address'];
+                    $customer->email = $_POST['email'];
+                
+                    $customerID = addCustomer($customer, $db);
+                    if (!$customerID) {
+                        header('Location: ../../Frontend/Pages/checkout.php?status=errorCreatingCustomer');
+                        exit;
+                    }
+                
+                    $cartItems = json_decode($_POST['cartItems'], true);
+                    foreach ($cartItems as $item) {
+                        $checkout = new stdClass();
+                        $checkout->customerID = $customerID;
+                        $checkout->productID = $item['id'];
+                        $result = addCheckout($checkout, $db);
+                        if (!$result) {
+                            header('Location: ../../Frontend/Pages/checkout.php?status=error');
+                            exit;
+                        }
+                    }
+                    header('Location: ../../Frontend/Pages/checkout.php?status=success');
+            break;
         default:
             header("Location: ../../index.php?errorCode=3&errorDesc=Invalid action!");
             break;

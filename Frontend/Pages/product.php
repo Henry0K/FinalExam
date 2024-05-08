@@ -4,6 +4,7 @@
    require_once("./Common/footer.php");
    require_once("../../Backend/Models/userModel.php");
    require_once("../Views/userView.php");
+    require_once("../Controllers/userController.php");
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +52,12 @@ https://templatemo.com/tm-589-lugx-gaming
   </div>
   <!-- ***** Preloader End ***** -->
 
-
 <?php
+    displayCart();
+    cartScripts();
     userNavbar("Shop");
     $productID = $_GET['productID'];
-    $product = getProductByID($productID);
+    $product = getProductByID($productID, "Shop");
     displayProductDetails($product);
   userFooter();
   

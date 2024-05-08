@@ -1,6 +1,7 @@
 <?php 
     require_once("./Common/navbar.php");
     require_once("../Views/userView.php");
+    require_once("../Controllers/userController.php");
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +39,8 @@
 </head>
 <body>
     <?php 
- 
+    displayCart();
+    cartScripts();
     userNavbar("contact"); 
     displayContactForm();
     ?>

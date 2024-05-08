@@ -1,5 +1,7 @@
 <?php 
 require_once("./Common/navbar.php");
+require_once("../Views/userView.php");
+require_once("../Controllers/userController.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,11 @@ require_once("./Common/navbar.php");
     <link rel="stylesheet" href="../Assets/assets/css/animate.css">
 </head>
 <body>
-    <?php userNavbar("about"); ?>
+    <?php 
+    displayCart();
+    cartScripts();
+    userNavbar("about"); 
+    ?>
     <style>
         p, h1, h2 {
             color: white;

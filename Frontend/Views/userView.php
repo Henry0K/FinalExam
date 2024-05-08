@@ -31,7 +31,7 @@ function getAllProducts($categories){
                               <div class="down-content">
                                   <span class="category"><?= htmlspecialchars($product['CATEGORY']) ?></span>
                                   <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
-                                  <a href="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>"><i class="fa fa-shopping-bag" style="margin-top: 10px;"></i></a>
+                                  <button onclick="addToCart(<?= htmlspecialchars($product['ID']) ?>)"><i class="fa fa-shopping-bag" style="margin-top: 10px;"></i></button>
                               </div>
                           </div>
                       </div>
@@ -68,10 +68,7 @@ function displayProductDetails($product){
             <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
             <span class="price">$<?= htmlspecialchars($product['PRICE']) ?></span>
             <p><?= htmlspecialchars($product['DESCRIPTION']) ?></p>
-            <form id="qty" action="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>">
-              <input type="number" class="form-control" id="quantity" aria-describedby="quantity" placeholder="1">
-              <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
-            </form>
+            <button onclick="addToCart(<?= htmlspecialchars($product['ID']) ?>)"><i class="fa fa-shopping-bag"></i>Add to Cart</button>
             <ul>
               <li><span>Category:</span> <a href="#"><?= htmlspecialchars($product['CATEGORY']) ?></a></li>
             </ul>
@@ -152,7 +149,7 @@ function displayShopPage($categories){
                         <div class="down-content">
                             <span class="category"><?= htmlspecialchars($product['CATEGORY']) ?></span>
                             <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
-                            <a href="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>"><i class="fa fa-shopping-bag"></i></a>
+                            <button onclick="addToCart(<?= htmlspecialchars($product['ID']) ?>)"><i class="fa fa-shopping-bag"></i></button>
                         </div>
                     </div>
                 </div>
@@ -160,6 +157,72 @@ function displayShopPage($categories){
             </div>
         </div>
     </div>
+    <?php
+}
+
+function displayCart(){
+    ?>
+    <div id="cart" style="position: fixed; right: 0; top: 0; width: 30%; height: 100%; background-color: white; display: none; z-index: 1000; overflow-y: auto;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h5 class="mb-3">Your Cart</h5>
+                            <div id="cart-items" class="mb-3"></div>
+                            <div class="d-flex justify-content-between">
+                                <span>Total:</span>
+                                <span id="total-price">$0</span>
+                            </div>
+                            <button onclick="toggleCart()" class="btn btn-primary">Close Cart</button>
+                            <a href="./checkout.php" class="btn btn-success btn-lg btn-block">Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+function displayCheckoutForm() {
+    ?>
+    <div class="container">
+        <h2>Checkout</h2>
+        <form action="../../Backend/Controllers/userController.php" method="post" onsubmit="submitCheckoutForm(event)">
+            <input type="hidden" name="action" value="CHECKOUT">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+            <div class="mb-3">
+                <label for="additionalInfo" class="form-label">Additional Information</label>
+                <textarea class="form-control" id="additionalInfo" name="additionalInfo" rows="3"></textarea>
+            </div>
+            <input type="hidden" id="cartItems" name="cartItems">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script>
+        function submitCheckoutForm(event) {
+            event.preventDefault();
+            const cartItems = localStorage.getItem('cart');
+            document.getElementById('cartItems').value = cartItems;
+            event.target.submit();
+        }
+    </script>
     <?php
 }
 ?>

@@ -21,6 +21,7 @@ function userNavbar($activePage){
                             <li><a href="<?php echo $basePath; ?>shop.php" <?php echo ($activePage == 'shop') ? 'class="active"' : ''; ?>>Shop</a></li>
                           <li><a href="<?php echo $basePath; ?>about.php" <?php echo ($activePage == 'about') ? 'class="active"' : ''; ?>>About Us</a></li>
                           <li><a href="<?php echo $basePath; ?>contact.php" <?php echo ($activePage == 'contact') ? 'class="active"' : ''; ?>>Contact Us</a></li>
+                          <li><a href="#" onclick="toggleCart(); return false;">Cart</a></li>
                           <li><a href="<?php echo $basePath; ?>login.php" <?php echo ($activePage == 'signin') ? 'class="active"' : ''; ?>>Sign In</a></li>
                       </ul>   
                       <!-- Menu Trigger -->

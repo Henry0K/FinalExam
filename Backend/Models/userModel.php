@@ -58,8 +58,12 @@ function getProducts(){
  * @param int $productID Product ID
  * @return array Associative array containing product details
  */
-function getProductByID($productID){
-    $db = require("../../Backend/Common/Dbconfig.php");
+function getProductByID($productID, $call){
+    if ($call == "Home" || $call == "Other"){
+        $db = require("./Common/Dbconfig.php");
+    } else {
+        $db = require("../../Backend/Common/Dbconfig.php");
+    }
     $query = "SELECT * FROM Products WHERE ID = '$productID'";
     $stmt = $db->query($query);
     return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -78,4 +82,36 @@ function insertContact($contact, $db) {
         $sql = "INSERT INTO table_contacts (Phone, Email, Subject, Body, ContactDate) VALUES ('$contact->phone', '$contact->email', '$contact->subject', '$contact->body', NOW())";
         $stmt = $db->query($sql);
         return $stmt->rowCount() > 0 ? true : false;
+}
+
+/**
+ * Adds a new product to the database.
+ * 
+ * @param stdClass $product Product details
+ * @param PDO $db Database connection object
+ * @return bool Returns true if the product was successfully added, otherwise false
+ */
+function addCheckout($checkout, $db) {
+    $sql = "INSERT INTO Checkout (CustomerID, ProductID, OrderDate) VALUES (:customerID, :productID, NOW())";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':customerID', $checkout->customerID);
+    $stmt->bindParam(':productID', $checkout->productID);
+    return $stmt->execute();
+}
+
+/**
+ * Adds a new customer to the database.
+ * 
+ * @param stdClass $customer Customer details
+ * @param PDO $db Database connection object
+ * @return int Returns the ID of the newly added customer
+ */
+function addCustomer($customer, $db) {
+    $sql = "INSERT INTO CustomerInformation (Name, Address, Email) VALUES (:name, :address, :email)";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam(':name', $customer->name);
+    $stmt->bindParam(':address', $customer->address);
+    $stmt->bindParam(':email', $customer->email);
+    $stmt->execute();
+    return $db->lastInsertId();
 }
