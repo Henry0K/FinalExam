@@ -17,7 +17,9 @@
     <style>
         .header-area {
             background-color: #007BFF; 
-            padding: 10px;
+            padding: 20px;
+            padding-top: 40px;
+            top: 0;
             
         }
         .nav-link {

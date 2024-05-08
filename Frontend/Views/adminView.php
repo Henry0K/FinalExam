@@ -370,6 +370,46 @@ function showEditUser(){
   </div>
   <?php
 }
+
+function displayMessages($messages){
+  ?>
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">Messages List</h5>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Subject</th>
+                      <th scope="col">Message</th>
+                      <th scope="col">Delete</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <?php foreach($messages as $message): ?>
+                  <tr>
+                      <th scope="row"><?php echo $message['ContactID']; ?></th>
+                      <td><?php echo htmlspecialchars($message['Phone']); ?></td>
+                      <td><?php echo htmlspecialchars($message['Email']); ?></td>
+                      <td><?php echo htmlspecialchars($message['Subject']); ?></td>
+                      <td><?php echo htmlspecialchars($message['Body']); ?></td>
+                      <td>
+                          <form method="post" action="../../../Backend/Controllers/adminController.php">
+                              <input type="hidden" name="action" value="DELETEMESSAGE">
+                              <input type="hidden" name="ID" value="<?php echo $message['ContactID']; ?>">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+                  <?php endforeach; ?>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <?php
+}
 ?>
 <script>
     function showEditFormUser(user) {

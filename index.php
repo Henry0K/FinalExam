@@ -76,7 +76,7 @@
             <div class="col-lg-3 col-md-6">
                 <a href="#" class="d-flex flex-column h-100">
                     <div class="item flex-grow-1"> 
-                        <img src="./Frontend/Assets/assets/images/phoness.jpeg" alt="Smartphones" class="img-fluid">
+                        <img src="./Frontend/Assets/assets/images/phones.png" alt="Smartphones" class="img-fluid" style="height: 200px; width: 200px; object-fit: cover;">
                         <h4>Smartphones and Accessories</h4>
                     </div>
                 </a>
@@ -84,7 +84,7 @@
             <div class="col-lg-3 col-md-6">
                 <a href="#" class="d-flex flex-column h-100">
                     <div class="item flex-grow-1">
-                        <img src="./Frontend/Assets/assets/images/tablets.jpeg" alt="Tablets" class="img-fluid">
+                        <img src="./Frontend/Assets/assets/images/tablets.jpeg" alt="Tablets" class="img-fluid" style="height: 200px; width: 200px; object-fit: cover;">
                         <h4>Tablets and Portable Computing</h4>
                     </div>
                 </a>
@@ -92,7 +92,7 @@
             <div class="col-lg-3 col-md-6">
                 <a href="#" class="d-flex flex-column h-100">
                     <div class="item flex-grow-1">
-                        <img src="./Frontend/Assets/assets/images/laptops.jpg" alt="Laptops" class="img-fluid">
+                        <img src="./Frontend/Assets/assets/images/laptops.jpg" alt="Laptops" class="img-fluid" style="height: 200px; width: 200px; object-fit: cover;">
                         <h4>Laptops and Desktop Computers</h4>
                     </div>
                 </a>
@@ -100,7 +100,7 @@
             <div class="col-lg-3 col-md-6">
                 <a href="#" class="d-flex flex-column h-100">
                     <div class="item flex-grow-1">
-                        <img src="./Frontend/Assets/assets/images/smarthome.jpg" alt="Smart Home" class="img-fluid">
+                        <img src="./Frontend/Assets/assets/images/smarthome.jpg" alt="Smart Home" class="img-fluid" style="height: 200px; width: 200px; object-fit: cover;">
                         <h4>Smart Home Devices</h4>
                     </div>
                 </a>
@@ -113,7 +113,7 @@
 
 <?php
     
-    getAllProducts(getAllProductCategories());
+    getAllProducts(getAllProductCategories("Home"));
 
 ?>
 

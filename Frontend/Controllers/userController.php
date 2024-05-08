@@ -27,7 +27,6 @@ function ScriptLogin(){
         }
     </script>
     <?php
-
 }
 
 ?>

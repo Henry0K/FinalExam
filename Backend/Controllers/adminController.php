@@ -123,14 +123,12 @@ if (isset($_POST["action"])) {
                 if(isset($_POST['id'])){
                     $id = $_POST['id'];  
                     $productDetails = getProductDetails($id, $db);
-                    $imagePath = "../../Frontend/Assets/Images/ProductImages/" . $productDetails['Image'];
+                    $imagePath = "../../Frontend/AdminAssets/Images/ProductImages/" . $productDetails['IMAGE'];
+                    echo $imagePath;
                     
                     if (file_exists($imagePath)) {
                         unlink($imagePath);
-                    } else {
-                        echo "File does not exist at: " . $imagePath;
-                    }
-            
+                    } 
                     $result = deleteProduct($id, $db);
                     if ($result == 1) {
                         header("Location: ../../Frontend/Pages/AdminPages/view-products.php?successCode=1&successDesc=Product deleted successfully!");
@@ -166,8 +164,6 @@ if (isset($_POST["action"])) {
             $user->gender = $_POST["gender"];
             $user->age = $_POST["age"];
             $user->activeStatus = 1;
-
-            print_r($user);
 
             $target_dir = "../../Frontend/AdminAssets/Images/ProfilePictures/";
             $target_file = $target_dir . $user->username . '.' . pathinfo($_FILES["profilePicture"]["name"], PATHINFO_EXTENSION);
@@ -218,6 +214,16 @@ if (isset($_POST["action"])) {
                     header("Location: ../../Frontend/Pages/AdminPages/view-users.php?successCode=1&successDesc=User deleted successfully!");
                 } else {
                     header("Location: ../../Frontend/Pages/AdminPages/view-users.php?errorCode=6&errorDesc=User deletion failed!");
+                }
+            }
+            break;
+        case "DELETEMESSAGE":
+            if (isset($_POST['ID'])) {
+                $id = $_POST['ID'];
+                if(deleteMessage($id, $db)){
+                    header("Location: ../../Frontend/Pages/AdminPages/view-messages.php?successCode=1&successDesc=Message deleted successfully!");
+                } else {
+                    header("Location: ../../Frontend/Pages/AdminPages/view-messages.php?errorCode=6&errorDesc=Message deletion failed!");
                 }
             }
             break;

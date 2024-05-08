@@ -1194,7 +1194,7 @@ Shop Page Style
   margin: 5px 8px;
 }
 
-.trending ul.trending-filter li a {
+.trending ul.trending-filter li form button {
   display: inline-block;
   text-align: center;
   font-size: 15px;
@@ -1207,16 +1207,16 @@ Shop Page Style
   transition: all .3s;
 }
 
-.trending ul.trending-filter li a.is_active {
+.trending ul.trending-filter li form button.is_active {
   background-color: #ee626b;
   color: #fff;
 }
 
-.trending ul.trending-filter li a.is_active:hover {
+.trending ul.trending-filter li form button.is_active:hover {
   color: #fff;
 }
 
-.trending ul.trending-filter li a:hover {
+.trending ul.trending-filter li form button:hover {
   color: #ee626b;
 }
 
@@ -1641,7 +1641,7 @@ body {
   .cta .shop .section-heading {
     margin-right: 0px;
   }
-  .trending ul.trending-filter li a {
+  .trending ul.trending-filter li form button {
     font-size: 13px;
     padding: 8px 10px;
   }

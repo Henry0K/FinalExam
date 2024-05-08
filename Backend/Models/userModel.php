@@ -2,33 +2,19 @@
 
 
 /**
- * @param $username
- * @param $password
- * @param $db
- * @return array|int
- */
-
-function Login($username, $password, $db){
-    $query = "SELECT ID, ProfilePicture, FirstName, LastName FROM Users WHERE Username = '$username' AND Password = PASSWORD('$password')";
-    $stmt = $db->query($query);
-    if ($stmt->rowCount() > 0) {
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $array = array("ID" => $row["ID"], "ProfilePicture" => $row["ProfilePicture"], "FirstName" => $row["FirstName"], "LastName" => $row["LastName"]);
-        return $array;
-    } else {
-        return -1;
-    }
-}
-
-
-
-/**
  * Retrieves all distinct product categories that are active.
  * 
  * @return array Returns an array of active product categories.
  */
-function getAllProductCategories(){
-    $db = require("./Backend/Common/Dbconfig.php");
+function getAllProductCategories($call){
+    //Changing the directory based on the call because index is in the root directory
+    //Whereas the shop is in the Frontend/Pages directory
+    if ($call == "Home"){
+        $db = require("./Backend/Common/Dbconfig.php");
+    } else {
+        $db = require("../../Backend/Common/Dbconfig.php");
+    }
+    
     $query = "SELECT DISTINCT CATEGORY FROM Products WHERE IS_ACTIVE = 1";
     $stmt = $db->query($query);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,9 +26,27 @@ function getAllProductCategories(){
  * @param string $category The category to filter products by.
  * @return array Returns an array of products within the specified category.
  */
-function getProductsByCategory($category){
-    $db = require("./Backend/Common/Dbconfig.php");
+function getProductsByCategory($category, $call){
+    if ($call == "Home"){
+        $db = require("./Backend/Common/Dbconfig.php");
+    } else {
+        $db = require("../../Backend/Common/Dbconfig.php");
+    }
+    
     $query = "SELECT * FROM Products WHERE CATEGORY = '$category' AND IS_ACTIVE = 1";
+    $stmt = $db->query($query);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+/**
+ * Fetches all products that are active.
+ * 
+ * @return array Returns an array of all active products.
+ */
+function getProducts(){
+    $db = require("../../Backend/Common/Dbconfig.php");
+    $query = "SELECT * FROM Products WHERE IS_ACTIVE = 1";
     $stmt = $db->query($query);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

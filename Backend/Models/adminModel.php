@@ -204,7 +204,8 @@ function addUser($db, $user) {
  * @return array Array of associative arrays containing contact message details
  */
 
-function getContactMessages($db) {
+function getMessages() {
+        $db = require("../../../Backend/Common/Dbconfig.php");
         $query = "SELECT * FROM table_contacts";
         $result = $db->query($query);
         return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -238,6 +239,12 @@ function getUserDetails($id, $db) {
         $query = "SELECT * FROM Users WHERE ID = '$id'";
         $result = $db->query($query);
         return $result->fetch(PDO::FETCH_ASSOC);
+}
+
+function deleteMessage($id,$db){
+    $query = "delete  FROM table_contacts  WHERE ContactID = '$id'";
+    $result = $db->query($query);
+    return $result->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>

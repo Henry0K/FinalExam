@@ -13,25 +13,25 @@ function getAllProducts($categories){
                   </div>
                   <div class="col-lg-12">
                       <div class="main-button">
-                          <a href="shop.html">View All</a>
+                          <a href="./Frontend/Pages/shop.php">View All</a>
                       </div>
                   </div>
                   <?php
-                  $products = getProductsByCategory($category['CATEGORY']);
+                  $products = getProductsByCategory($category['CATEGORY'], "Home");
                   foreach ($products as $product):
                   ?>
                       <div class="col-lg-3 col-md-6">
                           <div class="item">
                               <div class="thumb">
                               <?php
-                               echo '<a href="./Frontend/Pages/shop.php?productID=' . htmlspecialchars($product['ID']) . '"><img src="./Frontend/AdminAssets/Images/ProductImages/' . htmlspecialchars($product['IMAGE']) . '" alt="' . htmlspecialchars($product['PRODUCT']) . '" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;"></a>';
+                               echo '<a href="./Frontend/Pages/product.php?productID=' . htmlspecialchars($product['ID']) . '"><img src="./Frontend/AdminAssets/Images/ProductImages/' . htmlspecialchars($product['IMAGE']) . '" alt="' . htmlspecialchars($product['PRODUCT']) . '" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;"></a>';
                               ?>
-                                  <span class="price"><?= htmlspecialchars($product['PRICE']) ?></span>
+                                  <span class="price">$<?= htmlspecialchars($product['PRICE']) ?></span>
                               </div>
                               <div class="down-content">
                                   <span class="category"><?= htmlspecialchars($product['CATEGORY']) ?></span>
                                   <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
-                                  <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
+                                  <a href="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>"><i class="fa fa-shopping-bag" style="margin-top: 10px;"></i></a>
                               </div>
                           </div>
                       </div>
@@ -44,30 +44,46 @@ function getAllProducts($categories){
 }
 
 function displayProductDetails($product){
-  ?>
-  <main id="main">
-      <section class="single-post-content">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-9 post-content" data-aos="fade-up">
-                      <!-- ======= Single Post Content ======= -->
-                      <div class="single-post">
-                          <div class="post-meta">
-                              <span class="date"><?= $product['CATEGORY'] ?></span>
-                              <span class="mx-1">&bullet;</span>
-                          </div>
-                          <h1 class="mb-5"><?= $product['PRODUCT'] ?></h1>
-                          <img src="../AdminAssets/Images/ProductImages/<?= $product['IMAGE'] ?>" alt="" class="img-fluid" style="width: 300px; height: 300px; object-fit: contain;">
-                          <p><?= $product['DESCRIPTION'] ?></p>
-                      </div><!-- End Single Post Content -->
-
-                  </div>
-              </div>
+    ?>
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3><?= htmlspecialchars($product['PRODUCT']) ?></h3>
+            <span class="breadcrumb"><a href="../../index.php">Home</a>  >  <a href="./shop.php">Shop</a>  > <?= htmlspecialchars($product['CATEGORY']) ?></span>
           </div>
-      </section>
-  </main><!-- End #main -->
-  <?php
-}
+        </div>
+      </div>
+    </div>
+  
+    <div class="single-product section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="left-image">
+              <img src="../AdminAssets/Images/ProductImages/<?= htmlspecialchars($product['IMAGE']) ?>" alt="<?= htmlspecialchars($product['PRODUCT']) ?>" class="img-fluid">
+            </div>
+          </div>
+          <div class="col-lg-6 align-self-center">
+            <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
+            <span class="price">$<?= htmlspecialchars($product['PRICE']) ?></span>
+            <p><?= htmlspecialchars($product['DESCRIPTION']) ?></p>
+            <form id="qty" action="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>">
+              <input type="number" class="form-control" id="quantity" aria-describedby="quantity" placeholder="1">
+              <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+            </form>
+            <ul>
+              <li><span>Category:</span> <a href="#"><?= htmlspecialchars($product['CATEGORY']) ?></a></li>
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <div class="sep"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php
+  }
 
 function displayContactForm(){
   ?>
@@ -95,6 +111,56 @@ function displayContactForm(){
         </form>
     </div>
   <?php
+}
+
+function displayShopPage($categories){
+    $currentCategory = isset($_GET['category']) ? $_GET['category'] : '*';
+    ?>
+    <div class="section trending">
+        <div class="container">
+            <ul class="trending-filter">
+                <li>
+                    <form action="./shop.php" method="get">
+                        <input type="hidden" name="category" value="*">
+                        <button type="submit" class="<?= $currentCategory == '*' ? 'is_active' : '' ?>">Show All</button>
+                    </form>
+                </li>
+                <?php foreach ($categories as $category): ?>
+                <li>
+                    <form action="./shop.php" method="get">
+                        <input type="hidden" name="category" value="<?= htmlspecialchars($category['CATEGORY']) ?>">
+                        <button type="submit" class="<?= $currentCategory == htmlspecialchars($category['CATEGORY']) ? 'is_active' : '' ?>"><?= htmlspecialchars($category['CATEGORY']) ?></button>
+                    </form>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="row trending-box">
+                <?php
+                if (isset($_GET['category']) && $_GET['category'] != '*') {
+                    $products = getProductsByCategory($_GET['category'], "Shop");
+                } else {
+                    $products = getProducts();
+                }
+                foreach ($products as $product):
+                ?>
+                <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items">
+                    <div class="item">
+                        <div class="thumb">
+                            <a href="./product.php?productID=<?= htmlspecialchars($product['ID']) ?>"><img src="../AdminAssets/Images/ProductImages/<?= htmlspecialchars($product['IMAGE']) ?>" alt="<?= htmlspecialchars($product['PRODUCT']) ?>" style="width: 300px; height: 300px; object-fit: contain;"></a>
+                            <span class="price">$<?= htmlspecialchars($product['PRICE']) ?></span>
+                        </div>
+                        <div class="down-content">
+                            <span class="category"><?= htmlspecialchars($product['CATEGORY']) ?></span>
+                            <h4><?= htmlspecialchars($product['PRODUCT']) ?></h4>
+                            <a href="./Frontend/Pages/product.php?productID=<?= htmlspecialchars($product['ID']) ?>"><i class="fa fa-shopping-bag"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php
 }
 ?>
   
